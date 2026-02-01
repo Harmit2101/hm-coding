@@ -8,7 +8,7 @@ interface ContactCardProps {
 const ContactCard: React.FC<ContactCardProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
-  const email = "vhmvaiwala@gmail.com";
+  const email = "hmcoding.h@gmail.com";
   const phone = "+919106147748";
 
   return (
