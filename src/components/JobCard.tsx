@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import type { JobOpening } from "../constants/careers";
+import type { Job } from "../types/jobs";
 
 interface JobCardProps {
-  job: JobOpening;
+  job: Job;
 }
 
 const JobCard: React.FC<JobCardProps> = ({ job }) => {
