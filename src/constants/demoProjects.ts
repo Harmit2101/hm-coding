@@ -21,17 +21,17 @@ export const demoProjects: DemoProject[] = [
     link: "https://vercel.com/templates/next.js/nextjs-ecommerce",
   },
   {
-    id: 3,
-    title: "Restaurant Website",
-    image:
-      "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1600&q=80",
-    link: "https://restaurant-template-react.vercel.app/",
+  id: 3,
+  title: "Restaurant Website",
+  image:
+    "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1600&q=80",
+  link: "https://react-restaurant-website.vercel.app/",
   },
   {
     id: 4,
     title: "SaaS Web App",
     image:
       "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1600&q=80",
-    link: "https://app.supabase.com/",
+    link: "https://vercel.com/templates/saas",
   },
 ];

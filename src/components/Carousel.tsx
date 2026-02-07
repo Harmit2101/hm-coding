@@ -34,27 +34,29 @@ const Carousel: React.FC<CarouselProps> = ({
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {projects.map((project) => (
-          <div
+          <a
             key={project.id}
-            className="min-w-full cursor-pointer relative"
-            onClick={() => window.open(project.link, "_blank")}
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="min-w-full relative block"
           >
             <img
               src={project.image}
               alt={project.title}
               className="carousel-img"
             />
-          </div>
+          </a>
         ))}
       </div>
 
       {/* Navigation Dots */}
-      <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-2">
+      <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-2 pointer-events-none">
         {projects.map((_, index) => (
           <button
             key={index}
             onClick={() => goTo(index)}
-            className={`w-3 h-3 rounded-full ${
+            className={`pointer-events-auto w-3 h-3 rounded-full ${
               current === index ? "bg-purple-600" : "bg-gray-400"
             } transition-colors`}
           />
