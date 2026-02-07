@@ -6,7 +6,7 @@ import Services from "./pages/Services";
 import ContactCard from "./components/ContactCard";
 import { useState } from "react";
 import About from "./pages/About";
-import Projects from "./pages/Projects";
+// import Projects from "./pages/Projects";
 import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
@@ -30,7 +30,7 @@ export default function App() {
             path="/services"
             element={<Services openContact={openContact} />}
           />
-          <Route path="/projects" element={<Projects />} />
+          {/* <Route path="/projects" element={<Projects />} /> */}
           {/* <Route path="/contact" element={<ContactCard />} /> */}
         </Routes>
       </main>

@@ -30,12 +30,12 @@ const Header: React.FC<HeaderProps> = ({ openContact }) => {
           >
             Services
           </Link>
-          <Link
+          {/* <Link
             to="/projects"
             className="text-gray-800 dark:text-gray-200 hover:text-purple-600 transition-colors"
           >
             Projects
-          </Link>
+          </Link> */}
           {/* Uncomment if needed */}
           <Link to="/about" className="text-gray-800 dark:text-gray-200 hover:text-purple-600">About</Link>
             <button

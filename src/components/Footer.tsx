@@ -22,12 +22,12 @@ const Footer: React.FC<FooterProps> = ({ openContact }) => {
           >
             Services
           </Link>
-          <Link
+          {/* <Link
             to="/projects"
             className="hover:text-purple-600 transition-colors"
           >
             Projects
-          </Link>
+          </Link> */}
           <Link to="/about" className="hover:text-purple-600 transition-colors">About</Link>
           <button
                 onClick={openContact}
