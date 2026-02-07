@@ -22,6 +22,12 @@ const Footer: React.FC<FooterProps> = ({ openContact }) => {
           >
             Services
           </Link>
+          <Link
+            to="/careers"
+            className="hover:text-purple-600 transition-colors"
+          >
+            Careers
+          </Link>
           {/* <Link
             to="/projects"
             className="hover:text-purple-600 transition-colors"

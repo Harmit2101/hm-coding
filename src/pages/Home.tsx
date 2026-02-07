@@ -1,10 +1,11 @@
 import React from "react";
+import { motion } from "framer-motion";
 import HMLogo from "../components/HMLogo";
 import { useNavigate } from "react-router-dom";
 import FirmLogo from "../assets/FirmLogo.jpg";
 
 interface HomeProps {
-  openContact: () => void; // receive openContact from App
+  openContact: () => void;
 }
 
 const services = [
@@ -22,97 +23,182 @@ const Home: React.FC<HomeProps> = ({ openContact }) => {
   };
 
   return (
-    <div className="w-full flex flex-col">
+    <motion.div
+      className="w-full flex flex-col"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-cyan-400 to-purple-600 text-white">
         <div className="max-w-7xl mx-auto gap-12 px-6 py-24 flex flex-col md:flex-row items-center justify-between">
-          <div className="md:w-1/2 space-y-6 text-center md:text-left">
+          <motion.div
+            className="md:w-1/2 space-y-6 text-center md:text-left"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+          >
             <h1 className="text-4xl md:text-5xl font-extrabold">
-              Build the Future with <span className="text-yellow-300">HM Coding</span>
+              Build the Future with{" "}
+              <span className="text-yellow-300">HM Coding</span>
             </h1>
+
             <p className="text-lg md:text-xl text-gray-100">
-              We craft websites, web apps, mobile apps, and AI-driven solutions that empower your business.
+              We craft websites, web apps, mobile apps, and AI-driven solutions
+              that empower your business.
             </p>
+
             <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-              <button
-                className="px-6 py-3 bg-yellow-300 text-gray-900 font-semibold rounded-lg shadow hover:bg-yellow-400 transition"
+              <motion.button
+                className="px-6 py-3 bg-yellow-300 text-gray-900 font-semibold rounded-lg shadow"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/services")}
               >
                 Explore Services
-              </button>
-              <button
-                className="px-6 py-3 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition"
-                onClick={openContact} // trigger global contact card
+              </motion.button>
+
+              <motion.button
+                className="px-6 py-3 border border-white text-white font-semibold rounded-lg"
+                whileHover={{ scale: 1.05, backgroundColor: "#ffffff", color: "#1f2937" }}
+                whileTap={{ scale: 0.95 }}
+                onClick={openContact}
               >
                 Contact Us
-              </button>
+              </motion.button>
             </div>
-          </div>
-          <div className="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+          </motion.div>
+
+          <motion.div
+            className="md:w-1/2 mt-10 md:mt-0 flex justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
             <HMLogo className="w-64 h-auto" />
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-gray-50 dark:bg-gray-900">
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12">
+          <motion.h2
+            className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             Our Services
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          </motion.h2>
+
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.12 },
+              },
+            }}
+          >
             {services.map((service, index) => (
-              <div
+              <motion.div
                 key={service.title}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow transform transition-transform duration-300 hover:scale-105 cursor-pointer"
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow cursor-pointer"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                whileHover={{ y: -6, scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 300 }}
                 onClick={() => handleServiceClick(index)}
               >
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">{service.description}</p>
-              </div>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {service.description}
+                </p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white dark:bg-gray-800">
+      <section className="py-20 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-          <div className="md:w-1/2">
+          <motion.div
+            className="md:w-1/2"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               About HM Coding
             </h2>
             <p className="text-gray-700 dark:text-gray-300 text-lg">
-              HM Coding is a cutting-edge technology firm delivering websites, web apps, mobile apps, and AI solutions. Our goal is to help businesses innovate and grow in the digital era.
+              HM Coding is a cutting-edge technology firm delivering websites,
+              web apps, mobile apps, and AI solutions. Our goal is to help
+              businesses innovate and grow in the digital era.
             </p>
-          </div>
-          <div
+          </motion.div>
+
+          <motion.div
             className="md:w-1/2 flex justify-center cursor-pointer"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.05 }}
             onClick={() => navigate("/about")}
           >
             <img
               src={FirmLogo}
               alt="Firm Logo"
-              className="rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105"
+              className="rounded-xl shadow-lg"
             />
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Call-to-Action Section */}
-      <section id="contact" className="py-20 bg-purple-600 text-white text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Project?</h2>
-        <p className="mb-8 text-lg md:text-xl">Contact us today and let's build something amazing together!</p>
-        <button
-          className="px-8 py-4 bg-yellow-300 text-gray-900 text-lg font-semibold rounded-lg shadow hover:bg-yellow-400 transition"
-          onClick={openContact} // trigger global contact card
+      <section className="py-20 bg-purple-600 text-white text-center">
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Ready to Start Your Project?
+        </motion.h2>
+
+        <motion.p
+          className="mb-8 text-lg md:text-xl"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+        >
+          Contact us today and let's build something amazing together!
+        </motion.p>
+
+        <motion.button
+          className="px-8 py-4 bg-yellow-300 text-gray-900 text-lg font-semibold rounded-lg shadow"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={openContact}
         >
           Contact Us
-        </button>
+        </motion.button>
       </section>
-    </div>
+    </motion.div>
   );
 };
 
