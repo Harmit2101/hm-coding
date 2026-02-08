@@ -22,12 +22,13 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "@types/node": "^24.10.11",
-    "react-router-dom": "^7.9.4"
+    "react-router-dom": "^7.9.4",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
+
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
