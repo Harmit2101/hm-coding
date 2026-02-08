@@ -8,7 +8,7 @@ import { useState } from "react";
 import About from "./pages/About";
 // import Projects from "./pages/Projects";
 import ScrollToTop from "./components/ScrollToTop";
-// import Careers from "./pages/Career";
+import Careers from "./pages/Career";
 
 export default function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -31,7 +31,7 @@ export default function App() {
             path="/services"
             element={<Services openContact={openContact} />}
           />
-          {/* <Route path="/careers" element={<Careers />} /> */}
+          <Route path="/careers" element={<Careers />} />
           {/* <Route path="/projects" element={<Projects />} /> */}
           {/* <Route path="/contact" element={<ContactCard />} /> */}
         </Routes>

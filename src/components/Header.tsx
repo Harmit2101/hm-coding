@@ -30,12 +30,12 @@ const Header: React.FC<HeaderProps> = ({ openContact }) => {
           >
             Services
           </Link>
-          {/* <Link
+          <Link
             to="/careers"
             className="text-gray-800 dark:text-gray-200 hover:text-purple-600 transition-colors"
           >
             Careers
-          </Link> */}
+          </Link>
           {/* <Link
             to="/projects"
             className="text-gray-800 dark:text-gray-200 hover:text-purple-600 transition-colors"
@@ -89,13 +89,13 @@ const Header: React.FC<HeaderProps> = ({ openContact }) => {
           >
             Services
           </Link>
-          {/* <Link
+          <Link
             to="/careers"
             className="block text-gray-800 dark:text-gray-200 hover:text-purple-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             Careers
-          </Link> */}
+          </Link>
           {/* <Link
             to="/projects"
             className="block text-gray-800 dark:text-gray-200 hover:text-purple-600 transition-colors"

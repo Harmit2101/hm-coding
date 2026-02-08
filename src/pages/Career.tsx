@@ -3,53 +3,27 @@ import { motion } from "framer-motion";
 import JobCard from "../components/JobCard";
 import type { Job } from "../types/jobs";
 
-const FALLBACK_JOBS: Job[] = [
-  {
-    _id: "1",
-    title: "Junior Software Engineer",
-    location: "Surat, Gujarat",
-    experience: "1–2 years",
-    type: "Full-time",
-    description:
-      "Work on real-world software systems including dashboards, SaaS platforms, and production-grade applications.",
-    applyUrl: "https://in.indeed.com/viewjob?jk=463317e64bf8fd0d",
-  },
-  {
-    _id: "2",
-    title: "Software Engineer",
-    location: "Surat, Gujarat",
-    experience: "2–4 years",
-    type: "Full-time",
-    description:
-      "Build scalable, high-performance systems using modern web technologies.",
-    applyUrl: "https://in.indeed.com/viewjob?jk=73d947a5cc31f2e8",
-  },
-  {
-    _id: "3",
-    title: "IoT Engineer",
-    location: "Surat, Gujarat",
-    experience: "1–3 years",
-    type: "Full-time",
-    description:
-      "Work with industrial machines, sensors, and real-time data pipelines.",
-    applyUrl: "https://in.indeed.com/viewjob?jk=2e6e4ddffe225652",
-  },
-];
-
 const Careers: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch("http://localhost:4000/jobs");
-        if (!res.ok) throw new Error("Backend not available");
-        const data = await res.json();
+        const res = await fetch("https://hm-coding.onrender.com/jobs");
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch jobs");
+        }
+
+        const data: Job[] = await res.json();
         setJobs(data);
       } catch (err) {
-        console.warn("Backend unavailable, using fallback jobs", err);
-        setJobs(FALLBACK_JOBS);
+        console.error("Error fetching jobs:", err);
+        setError(
+          "Our careers service is waking up. Please refresh in a few seconds."
+        );
       } finally {
         setLoading(false);
       }
@@ -96,13 +70,29 @@ const Careers: React.FC = () => {
             Current Openings
           </motion.h2>
 
+          {/* Loading */}
           {loading && (
             <p className="text-center text-gray-600 dark:text-gray-300">
               Loading job openings…
             </p>
           )}
 
-          {!loading && (
+          {/* Error */}
+          {!loading && error && (
+            <p className="text-center text-gray-500 dark:text-gray-400">
+              {error}
+            </p>
+          )}
+
+          {/* Empty */}
+          {!loading && !error && jobs.length === 0 && (
+            <p className="text-center text-gray-600 dark:text-gray-300">
+              There are no open positions right now. Please check back later.
+            </p>
+          )}
+
+          {/* Jobs */}
+          {!loading && !error && jobs.length > 0 && (
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 gap-8"
               initial="hidden"
