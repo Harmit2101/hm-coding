@@ -4,11 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "server": "nodemon --watch server --exec tsx server/index.ts"
+  "dev": "vite",
+  "build": "tsc -b && vite build",
+  "lint": "eslint .",
+  "preview": "vite preview",
+
+  "server:dev": "nodemon --watch server --exec tsx server/index.ts",
+  "build:server": "tsc -p server/tsconfig.json",
+  "server": "node dist/index.js"
   },
   "dependencies": {
     "cors": "^2.8.6",
