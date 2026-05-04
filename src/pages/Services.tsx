@@ -34,34 +34,49 @@ const Services: React.FC<ServicesProps> = ({ openContact }) => {
   const renderDetails = (index: number) => (
     <motion.div
       key={index}
+      layout
       className="mt-4 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg"
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: "auto" }}
-      exit={{ opacity: 0, height: 0 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        duration: 0.4,
+        ease: [0.25, 0.8, 0.25, 1],
+      }}
     >
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-        {services[index].title} Details
-      </h2>
-
-      <p className="text-gray-700 dark:text-gray-300 mb-2">
-        <strong>Average Time:</strong> {services[index].avgTime}
-      </p>
-      <p className="text-gray-700 dark:text-gray-300 mb-2">
-        <strong>Price Range:</strong> {services[index].price}
-      </p>
-      <p className="text-gray-700 dark:text-gray-300 mb-4">
-        <strong>Variations:</strong> {services[index].variations.join(", ")}
-      </p>
-
-      <motion.button
-        className="px-6 py-3 bg-purple-600 text-white rounded-lg shadow"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={openContact}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 16 }}
+        transition={{
+          duration: 0.35,
+          ease: "easeOut",
+        }}
       >
-        Raise Enquiry
-      </motion.button>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          {services[index].title} Details
+        </h2>
+
+        <p className="text-gray-700 dark:text-gray-300 mb-2">
+          <strong>Average Time:</strong> {services[index].avgTime}
+        </p>
+        <p className="text-gray-700 dark:text-gray-300 mb-2">
+          <strong>Price Range:</strong> {services[index].price}
+        </p>
+        <p className="text-gray-700 dark:text-gray-300 mb-4">
+          <strong>Variations:</strong> {services[index].variations.join(", ")}
+        </p>
+
+        <motion.button
+          className="px-6 py-3 bg-purple-600 text-white rounded-lg shadow"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+          onClick={openContact}
+        >
+          Raise Enquiry
+        </motion.button>
+      </motion.div>
     </motion.div>
   );
 
@@ -82,27 +97,12 @@ const Services: React.FC<ServicesProps> = ({ openContact }) => {
           Our Services
         </motion.h1>
 
-        {/* Service Cards */}
         <motion.div
+          layout
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: {},
-            visible: {
-              transition: { staggerChildren: 0.12 },
-            },
-          }}
         >
           {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              className="flex flex-col"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-            >
+            <motion.div key={service.title} layout className="flex flex-col">
               <motion.div
                 className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow cursor-pointer"
                 whileHover={{ y: -6, scale: 1.03 }}
@@ -118,7 +118,6 @@ const Services: React.FC<ServicesProps> = ({ openContact }) => {
                 </p>
               </motion.div>
 
-              {/* Mobile details */}
               {isMobile && (
                 <AnimatePresence>
                   {activeIndex === index && renderDetails(index)}
@@ -128,11 +127,12 @@ const Services: React.FC<ServicesProps> = ({ openContact }) => {
           ))}
         </motion.div>
 
-        {/* Desktop details */}
         {!isMobile && (
           <AnimatePresence>
             {activeIndex !== null && (
-              <div className="mt-12">{renderDetails(activeIndex)}</div>
+              <motion.div layout className="mt-12">
+                {renderDetails(activeIndex)}
+              </motion.div>
             )}
           </AnimatePresence>
         )}

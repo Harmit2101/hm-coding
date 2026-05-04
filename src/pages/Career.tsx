@@ -2,28 +2,29 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import JobCard from "../components/JobCard";
 import type { Job } from "../types/jobs";
+import InternshipHero from "../components/InternshipHero";
+import InternshipDetails from "../components/InternshipDetails";
 
-const Careers: React.FC = () => {
+interface CareersProps {
+  openContact: () => void;
+  openStartupContact: () => void;
+}
+
+const Careers: React.FC<CareersProps> = ({
+  openContact,
+  openStartupContact,
+}) => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
         const res = await fetch("https://hm-coding.onrender.com/jobs");
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch jobs");
-        }
-
-        const data: Job[] = await res.json();
+        const data = await res.json();
         setJobs(data);
       } catch (err) {
-        console.error("Error fetching jobs:", err);
-        setError(
-          "Our careers service is waking up. Please refresh in a few seconds."
-        );
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -33,96 +34,59 @@ const Careers: React.FC = () => {
   }, []);
 
   return (
-    <motion.div
-      className="w-full flex flex-col"
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      {/* Hero */}
-      <section className="bg-gradient-to-r from-purple-600 to-cyan-500 text-white py-24">
-        <motion.div
-          className="max-w-6xl mx-auto px-6 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
-        >
+    <motion.div className="w-full flex flex-col">
+
+      {/* HERO */}
+      <section className="bg-gradient-to-r from-purple-600 to-cyan-500 text-white py-20">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
             Careers at HM Coding
           </h1>
-          <p className="text-lg md:text-xl text-gray-100 max-w-3xl mx-auto">
-            We’re always looking for passionate engineers and creators who want
-            to build meaningful digital products.
+
+          {/* NEW TAGLINE */}
+          <p className="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto">
+            Join us to work on real-world projects, build impactful products,
+            and grow with hands-on experience.
           </p>
-        </motion.div>
+
+        </div>
       </section>
 
-      {/* Openings */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.h2
-            className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Current Openings
-          </motion.h2>
+      {/* INTERNSHIP */}
+      <InternshipHero onApplyNow={openContact} />
 
-          {/* Loading */}
+      <InternshipDetails onSendIdea={openStartupContact} />
+
+      {/* JOBS */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-900"> {/* 👈 reduced from py-20 */}
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Current Openings
+          </h2>
+
           {loading && (
             <p className="text-center text-gray-600 dark:text-gray-300">
-              Loading job openings…
+              Loading…
             </p>
           )}
 
-          {/* Error */}
-          {!loading && error && (
-            <p className="text-center text-gray-500 dark:text-gray-400">
-              {error}
-            </p>
-          )}
-
-          {/* Empty */}
-          {!loading && !error && jobs.length === 0 && (
+          {!loading && jobs.length === 0 && (
             <p className="text-center text-gray-600 dark:text-gray-300">
-              There are no open positions right now. Please check back later.
+              No active openings right now.
             </p>
           )}
 
-          {/* Jobs */}
-          {!loading && !error && jobs.length > 0 && (
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-8"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: {
-                    staggerChildren: 0.12,
-                  },
-                },
-              }}
-            >
+          {!loading && jobs.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {jobs.map((job) => (
-                <motion.div
-                  key={job._id}
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                >
-                  <JobCard job={job} />
-                </motion.div>
+                <JobCard key={job._id} job={job} />
               ))}
-            </motion.div>
+            </div>
           )}
         </div>
       </section>
+
     </motion.div>
   );
 };

@@ -6,23 +6,38 @@ import Services from "./pages/Services";
 import ContactCard from "./components/ContactCard";
 import { useState } from "react";
 import About from "./pages/About";
-// import Projects from "./pages/Projects";
 import ScrollToTop from "./components/ScrollToTop";
 import Careers from "./pages/Career";
 
 export default function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [contactType, setContactType] = useState<
+    "general" | "career" | "startup"
+  >("general");
 
-  const openContact = () => setIsContactOpen(true);
+  const openContact = () => {
+    setContactType("general");
+    setIsContactOpen(true);
+  };
+
+  const openCareerContact = () => {
+    setContactType("career");
+    setIsContactOpen(true);
+  };
+
+  const openStartupContact = () => {
+    setContactType("startup");
+    setIsContactOpen(true);
+  };
+
   const closeContact = () => setIsContactOpen(false);
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
-      {/* Fixed Header */}
       <Header openContact={openContact} />
 
       <ScrollToTop />
-      {/* Scrollable Main Content */}
+
       <main className="flex-grow overflow-y-auto bg-gray-50 dark:bg-gray-900 pt-12 pb-12">
         <Routes>
           <Route path="/" element={<Home openContact={openContact} />} />
@@ -31,17 +46,26 @@ export default function App() {
             path="/services"
             element={<Services openContact={openContact} />}
           />
-          <Route path="/careers" element={<Careers />} />
-          {/* <Route path="/projects" element={<Projects />} /> */}
-          {/* <Route path="/contact" element={<ContactCard />} /> */}
+          
+          <Route
+            path="/careers"
+            element={
+              <Careers
+                openContact={openCareerContact}
+                openStartupContact={openStartupContact} // 👈 new
+              />
+            }
+          />
         </Routes>
       </main>
 
-      {/* Fixed Footer */}
       <Footer openContact={openContact} />
 
-      {/* Overlay Contact Card */}
-      <ContactCard isOpen={isContactOpen} onClose={closeContact} />
+      <ContactCard
+        isOpen={isContactOpen}
+        onClose={closeContact}
+        type={contactType}
+      />
     </div>
   );
 }
