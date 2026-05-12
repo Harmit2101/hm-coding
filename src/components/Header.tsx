@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ openContact }) => {
       <div className="mx-4 flex items-center h-16 px-4 sm:px-6 lg:px-8">
         {/* Left side: Logo */}
         <div className="flex-shrink-0">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2" aria-label="HM Coding home">
             <HMLogo />
           </Link>
         </div>
@@ -36,13 +36,12 @@ const Header: React.FC<HeaderProps> = ({ openContact }) => {
           >
             Careers
           </Link>
-          {/* <Link
+          <Link
             to="/projects"
             className="text-gray-800 dark:text-gray-200 hover:text-purple-600 transition-colors"
           >
             Projects
-          </Link> */}
-          {/* Uncomment if needed */}
+          </Link>
           <Link to="/about" className="text-gray-800 dark:text-gray-200 hover:text-purple-600">About</Link>
             <button
                 onClick={openContact}
@@ -96,14 +95,13 @@ const Header: React.FC<HeaderProps> = ({ openContact }) => {
           >
             Careers
           </Link>
-          {/* <Link
+          <Link
             to="/projects"
             className="block text-gray-800 dark:text-gray-200 hover:text-purple-600 transition-colors"
             onClick={() => setIsOpen(false)}
           >
             Projects
-          </Link> */}
-          {/* Uncomment if needed */}
+          </Link>
           <Link 
             to="/about" 
             className="block text-gray-800 dark:text-gray-200 hover:text-purple-600 transition-colors" 

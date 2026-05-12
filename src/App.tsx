@@ -8,6 +8,8 @@ import { useState } from "react";
 import About from "./pages/About";
 import ScrollToTop from "./components/ScrollToTop";
 import Careers from "./pages/Career";
+import Projects from "./pages/Projects";
+import ProjectDemoEntry from "./pages/ProjectDemoEntry";
 
 export default function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -46,7 +48,8 @@ export default function App() {
             path="/services"
             element={<Services openContact={openContact} />}
           />
-          
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<ProjectDemoEntry />} />
           <Route
             path="/careers"
             element={

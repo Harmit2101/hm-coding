@@ -1,8 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import HMLogo from "../components/HMLogo";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FirmLogo from "../assets/FirmLogo.jpg";
+import { ProjectShowcaseCard } from "../components/projects/ProjectShowcaseCard";
+import { getHomeFeaturedProjects } from "../constants/projects";
+
+const featuredProjects = getHomeFeaturedProjects();
 
 interface HomeProps {
   openContact: () => void;
@@ -70,12 +74,12 @@ const Home: React.FC<HomeProps> = ({ openContact }) => {
           </motion.div>
 
           <motion.div
-            className="md:w-1/2 mt-10 md:mt-0 flex justify-center"
-            initial={{ opacity: 0, scale: 0.9 }}
+            className="md:w-1/2 mt-10 md:mt-0 flex justify-center md:justify-end md:pr-2 md:pt-1"
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: 0.2, duration: 0.55 }}
           >
-            <HMLogo className="w-64 h-auto" />
+            <HMLogo variant="hero" />
           </motion.div>
         </div>
       </section>
@@ -129,8 +133,52 @@ const Home: React.FC<HomeProps> = ({ openContact }) => {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* Featured projects */}
       <section className="py-20 bg-white dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            className="mb-10 text-center md:text-left md:flex md:items-end md:justify-between md:gap-8"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wider text-purple-600 dark:text-purple-400">
+                Featured projects
+              </p>
+              <h2 className="mt-2 text-3xl font-bold text-gray-900 dark:text-white md:text-4xl">View our work</h2>
+              <p className="mt-3 max-w-2xl text-gray-600 dark:text-gray-300">
+                Interactive demos and product-style builds—CRM, POS, and operations dashboards crafted like we ship for clients.
+              </p>
+            </div>
+            <Link
+              to="/projects"
+              className="mt-6 inline-flex shrink-0 items-center justify-center rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:opacity-95 md:mt-0"
+            >
+              Full showcase
+            </Link>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-32px" }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1 } },
+            }}
+          >
+            {featuredProjects.map((project) => (
+              <ProjectShowcaseCard key={project.slug} project={project} />
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
           <motion.div
             className="md:w-1/2"
