@@ -1,42 +1,50 @@
-// HMLogo.tsx
-import React from "react";
+import type { FC } from "react";
+import { HMCodingLogo } from "./HMCodingLogo";
 
-const HMLogo: React.FC<{ className?: string }> = ({ className }) => (
-  <svg
-    className={className}
-    width="155"
-    height="50"
-    viewBox="0 0 150 50"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <defs>
-      <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#6C63FF" />
-        <stop offset="100%" stopColor="#00F0FF" />
-      </linearGradient>
-    </defs>
-    <text
-      x="0"
-      y="40"
-      fontFamily="Poppins, sans-serif"
-      fontWeight="700"
-      fontSize="36"
-      fill="url(#grad)"
-    >
-      HM
-    </text>
-    <text
-      x="65"
-      y="36"
-      fontFamily="Poppins, sans-serif"
-      fontWeight="500"
-      fontSize="24"
-      fill="url(#grad)"
-    >
-      Coding
-    </text>
-  </svg>
-);
+export type HMLogoProps = {
+  className?: string;
+  /**
+   * Navbar: theme-aware wordmark + icon.
+   * Hero: single transparent treatment for gradient hero (use with `placement="hero"`).
+   */
+  variant?: "responsive" | "hero";
+};
+
+/** Default header lockup — readable, not oversized */
+const navLockupDefault =
+  "h-10 w-auto max-w-[230px] sm:h-11 sm:max-w-[250px]";
+
+/** Hero — subtle presence, balanced with headline column */
+const heroLockupDefault =
+  "w-full max-w-[260px] sm:max-w-[290px] md:max-w-[320px] opacity-[0.98]";
+
+/**
+ * HM Coding brand logo — thin wrapper around {@link HMCodingLogo} for nav vs hero placement.
+ */
+const HMLogo: FC<HMLogoProps> = ({ className, variant = "responsive" }) => {
+  if (variant === "hero") {
+    const box = className?.trim() ? className : heroLockupDefault;
+    return (
+      <span className={`relative inline-block aspect-[450/160] ${box}`}>
+        <span className="block h-full w-full">
+          <HMCodingLogo tone="hero" className="h-full w-full" />
+        </span>
+      </span>
+    );
+  }
+
+  const navBox = className?.trim() ? className : navLockupDefault;
+
+  return (
+    <span className={`relative inline-block aspect-[450/160] ${navBox}`}>
+      <span className="block h-full w-full dark:hidden">
+        <HMCodingLogo tone="nav-light" className="h-full w-full" />
+      </span>
+      <span className="absolute inset-0 hidden h-full w-full dark:block">
+        <HMCodingLogo tone="nav-dark" className="h-full w-full" />
+      </span>
+    </span>
+  );
+};
 
 export default HMLogo;
