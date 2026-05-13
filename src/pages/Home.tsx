@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import HMLogo from "../components/HMLogo";
 import { Link, useNavigate } from "react-router-dom";
-import FirmLogo from "../assets/FirmLogo.jpg";
+import FirmLogo from "../assets/AboutImage.png";
 import { ProjectShowcaseCard } from "../components/projects/ProjectShowcaseCard";
 import { getHomeFeaturedProjects } from "../constants/projects";
 
@@ -80,6 +80,51 @@ const Home: React.FC<HomeProps> = ({ openContact }) => {
             transition={{ delay: 0.2, duration: 0.55 }}
           >
             <HMLogo variant="hero" />
+          </motion.div>
+        </div>
+      </section>
+      
+      {/* About Section */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+          <motion.div
+            className="md:w-1/2"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              About HM Coding
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300 text-lg">
+              HM Coding is a cutting-edge technology firm delivering websites,
+              web apps, mobile apps, and AI solutions. Our goal is to help
+              businesses innovate and grow in the digital era.
+            </p>
+          </motion.div>
+
+
+          <motion.div
+            className="md:w-1/2 flex justify-center cursor-pointer"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.03 }}
+            onClick={() => navigate("/about")}
+          >
+            <div className="relative group max-w-xl">
+              {/* Ambient glow */}
+              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 blur-2xl opacity-70 group-hover:opacity-100 transition duration-500" />
+
+              {/* Image */}
+              <img
+                src={FirmLogo}
+                alt="HM Coding dashboard preview"
+                className="relative rounded-[2rem] border border-white/10 shadow-2xl object-cover"
+              />
+            </div>
           </motion.div>
         </div>
       </section>
@@ -173,44 +218,6 @@ const Home: React.FC<HomeProps> = ({ openContact }) => {
             {featuredProjects.map((project) => (
               <ProjectShowcaseCard key={project.slug} project={project} />
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-          <motion.div
-            className="md:w-1/2"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              About HM Coding
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300 text-lg">
-              HM Coding is a cutting-edge technology firm delivering websites,
-              web apps, mobile apps, and AI solutions. Our goal is to help
-              businesses innovate and grow in the digital era.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="md:w-1/2 flex justify-center cursor-pointer"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ scale: 1.05 }}
-            onClick={() => navigate("/about")}
-          >
-            <img
-              src={FirmLogo}
-              alt="Firm Logo"
-              className="rounded-xl shadow-lg"
-            />
           </motion.div>
         </div>
       </section>

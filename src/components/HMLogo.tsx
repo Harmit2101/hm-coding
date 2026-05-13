@@ -12,11 +12,11 @@ export type HMLogoProps = {
 
 /** Default header lockup — readable, not oversized */
 const navLockupDefault =
-  "h-10 w-auto max-w-[230px] sm:h-11 sm:max-w-[250px]";
+  "h-11 w-auto max-w-[260px] sm:h-12 sm:max-w-[290px]";
 
 /** Hero — subtle presence, balanced with headline column */
 const heroLockupDefault =
-  "w-full max-w-[260px] sm:max-w-[290px] md:max-w-[320px] opacity-[0.98]";
+  "w-full max-w-[300px] sm:max-w-[340px] md:max-w-[380px] opacity-[0.98]";
 
 /**
  * HM Coding brand logo — thin wrapper around {@link HMCodingLogo} for nav vs hero placement.

@@ -92,13 +92,13 @@ export function HMCodingLogo({ className, tone, title = "HM Coding" }: HMCodingL
         x={135}
         y={100}
         fontFamily="system-ui, -apple-system, sans-serif"
-        fontSize={38}
+        fontSize={52}
         fontWeight={800}
         fill={hmFill}
-        letterSpacing={-1}
+        letterSpacing={-0.5}
       >
         HM
-        <tspan fill={codingFill} fontWeight={300} letterSpacing={0}>
+        <tspan fill={codingFill} fontWeight={500} letterSpacing={0}>
           {" "}
           CODING
         </tspan>
